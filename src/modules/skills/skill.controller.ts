@@ -12,7 +12,7 @@ const createSkill = asyncHandler(async (req: Request, res: Response) => {
   }
 
   if (req.file) {
-    payload.picture = (req.file as any).path;
+    payload.iconUrl = (req.file as any).path;
   }
   const userId = (req as any).user.id;
   const skill = await SkillServices.createSkill(userId, payload);

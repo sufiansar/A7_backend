@@ -12,8 +12,9 @@ const createBlog = asyncHandler(async (req: Request, res: Response) => {
   }
 
   if (req.file) {
-    payload.picture = (req.file as any).path;
+    payload.coverImage = (req.file as any).path;
   }
+  console.log(payload);
   const userId = (req as any).user.id;
   const blog = await BlogServices.createBlog(userId, payload);
 

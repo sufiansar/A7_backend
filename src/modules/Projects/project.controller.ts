@@ -12,7 +12,7 @@ const createProject = asyncHandler(async (req: Request, res: Response) => {
   }
 
   if (req.file) {
-    payload.picture = (req.file as any).path;
+    payload.imageUrl = (req.file as any).path;
   }
   const userId = (req as any).user.id;
   const project = await ProjectServices.createProject(userId, payload);
