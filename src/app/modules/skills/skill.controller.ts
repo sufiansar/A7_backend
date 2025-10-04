@@ -38,7 +38,17 @@ const getAllSkills = asyncHandler(async (req: Request, res: Response) => {
 
 const updateSkill = asyncHandler(async (req: Request, res: Response) => {
   const skillId = req.params.id;
-  const payload = req.body;
+
+  let payload: any;
+  if (req.body.data) {
+    payload = JSON.parse(req.body.data);
+  } else {
+    payload = { ...req.body };
+  }
+
+  if (req.file) {
+    payload.iconUrl = (req.file as any).path;
+  }
 
   const skill = await SkillServices.updateSkill(skillId, payload);
 

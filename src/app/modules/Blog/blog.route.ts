@@ -14,7 +14,12 @@ router.post(
   MulterUpload.single("file"),
   BlogController.createBlog
 );
-router.patch("/:id", checkAuth, BlogController.updateBlog);
+router.patch(
+  "/:id",
+  checkAuth,
+  MulterUpload.single("file"),
+  BlogController.updateBlog
+);
 router.delete("/:id", checkAuth, BlogController.deleteBlog);
 
 export const BlogRoutes = router;

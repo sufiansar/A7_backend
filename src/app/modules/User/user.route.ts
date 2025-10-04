@@ -10,7 +10,7 @@ router.post(
   MulterUpload.single("file"),
   UserControllers.registerUser
 );
-router.put("/:id", UserControllers.updateUser);
-router.delete("/:id", UserControllers.deleteUser);
+router.patch("/:id", MulterUpload.single("file"), checkAuth, UserControllers.updateUser);
+router.delete("/:id", checkAuth, UserControllers.deleteUser);
 router.get("/me", checkAuth, UserControllers.getMe);
 export const UserRoutes = router;

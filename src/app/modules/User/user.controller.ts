@@ -43,7 +43,17 @@ const getMe = asyncHandler(
 
 const updateUser = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.params.id;
-  const payload = req.body;
+  
+  let payload: any;
+  if (req.body.data) {
+    payload = JSON.parse(req.body.data);
+  } else {
+    payload = { ...req.body };
+  }
+
+  if (req.file) {
+    payload.picture = (req.file as any).path;
+  }
 
   const updatedUser = await UserServices.updateUser(userId, payload);
 

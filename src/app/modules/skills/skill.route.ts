@@ -10,10 +10,15 @@ router.get("/", SkillController.getAllSkills);
 router.post(
   "/create",
   checkAuth,
-  MulterUpload.single("iconUrl"),
+  MulterUpload.single("file"),
   SkillController.createSkill
 );
 
-router.patch("/:id", checkAuth, SkillController.updateSkill);
+router.patch(
+  "/:id",
+  checkAuth,
+  MulterUpload.single("file"),
+  SkillController.updateSkill
+);
 router.delete("/:id", checkAuth, SkillController.deleteSkill);
 export const SkillRoutes = router;

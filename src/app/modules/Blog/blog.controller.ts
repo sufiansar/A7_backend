@@ -51,7 +51,17 @@ const getBlogById = asyncHandler(async (req: Request, res: Response) => {
 
 const updateBlog = asyncHandler(async (req: Request, res: Response) => {
   const blogId = req.params.id;
-  const payload = req.body;
+
+  let payload: any;
+  if (req.body.data) {
+    payload = JSON.parse(req.body.data);
+  } else {
+    payload = { ...req.body };
+  }
+
+  if (req.file) {
+    payload.coverImage = (req.file as any).path;
+  }
 
   const blog = await BlogServices.updateBlog(blogId, payload);
 

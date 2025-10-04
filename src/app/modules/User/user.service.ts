@@ -6,36 +6,6 @@ import { createUserToken } from "../../utils/jwt";
 
 const prisma = new PrismaClient();
 
-// const registerUser = async (payload: Partial<IUser>) => {
-//   const { email, password, name, picture } = payload;
-
-//   const isEmailExist = await prisma.user.findUnique({
-//     where: { email },
-//   });
-
-//   if (isEmailExist) {
-//     throw new AppError(400, "User already exists");
-//   }
-
-//   const hashedPassword = await bcrypt.hash(
-//     password!,
-//     Number(process.env.BCRYPT_SALT_ROUNDS)
-//   );
-
-//   const user = await prisma.user.create({
-//     data: {
-//       email: email!,
-//       name: name!,
-//       password: hashedPassword,
-//       picture,
-//     },
-//   });
-
-//   const tokens = createUserToken({ id: user.id, email: user.email });
-
-//   return { user, tokens };
-// };
-
 const registerUser = async (payload: Partial<IUser>) => {
   const { email, password, name, picture } = payload;
 
@@ -75,8 +45,6 @@ const registerUser = async (payload: Partial<IUser>) => {
 
   return { user: users, tokens };
 };
-
-export default registerUser;
 
 const getMe = async (userId: string) => {
   const user = await prisma.user.findUnique({

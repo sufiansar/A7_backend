@@ -50,7 +50,17 @@ const getProjectById = asyncHandler(async (req: Request, res: Response) => {
 
 const updateProject = asyncHandler(async (req: Request, res: Response) => {
   const projectId = req.params.id;
-  const payload = req.body;
+
+  let payload: any;
+  if (req.body.data) {
+    payload = JSON.parse(req.body.data);
+  } else {
+    payload = { ...req.body };
+  }
+
+  if (req.file) {
+    payload.imageUrl = (req.file as any).path;
+  }
 
   const project = await ProjectServices.updateProject(projectId, payload);
 

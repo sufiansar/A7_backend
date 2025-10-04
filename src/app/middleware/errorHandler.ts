@@ -14,7 +14,6 @@ export const errorHandler = (
   let error = { ...err };
   error.message = err.message;
 
-  // JWT errors
   if (err.name === "JsonWebTokenError") {
     const message = "Invalid token";
     error.statusCode = 401;

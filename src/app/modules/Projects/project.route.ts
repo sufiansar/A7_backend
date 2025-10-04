@@ -14,7 +14,12 @@ router.post(
   MulterUpload.single("file"),
   ProjectController.createProject
 );
-router.patch("/:id", checkAuth, ProjectController.updateProject);
+router.patch(
+  "/:id",
+  checkAuth,
+  MulterUpload.single("file"),
+  ProjectController.updateProject
+);
 router.delete("/:id", checkAuth, ProjectController.deleteProject);
 
 export const ProjectRoutes = router;

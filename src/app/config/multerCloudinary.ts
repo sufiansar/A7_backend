@@ -3,14 +3,13 @@ import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v2 as cloudinary } from "cloudinary";
 import { AppError } from "../utils/AppError";
 
-// cloudinary config
 const validateCloudinaryConfig = () => {
   const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_SECRET_KEY } =
     process.env;
 
   if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_API_KEY || !CLOUDINARY_SECRET_KEY) {
     console.warn(
-      "⚠️  Cloudinary environment variables not configured. Image upload will not work."
+      "  Cloudinary environment variables not configured. Image upload will not work."
     );
     return false;
   }
@@ -98,7 +97,6 @@ export const deleteImageFromCloudinary = async (url: string) => {
   }
 };
 
-// Multer Config
 const fileFilter = (req: any, file: any, cb: any) => {
   if (file.mimetype.startsWith("image/")) {
     cb(null, true);

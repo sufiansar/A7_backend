@@ -2,17 +2,15 @@
   "name": "portfolio-backend",
   "version": "1.0.0",
   "description": "Portfolio Backend API with Express.js, Prisma, and TypeScript",
-  "main": "dist/server.js",
+  "main": "dist/app/server.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "prisma generate && npx tsc",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
-    "dev:watch": "nodemon --exec ts-node src/server.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:seed": "ts-node prisma/seed.ts",
     "prisma:studio": "prisma studio",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "prisma generate"
   },
   "keywords": [
     "portfolio",
@@ -27,7 +25,6 @@
   "type": "commonjs",
   "dependencies": {
     "@prisma/client": "^6.16.2",
-    "@types/multer": "^2.0.0",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^1.41.3",
     "cookie-parser": "^1.4.7",
@@ -38,10 +35,10 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
-    "multer-storage-cloudinary": "^4.0.0",
-    "ts-node-dev": "^2.0.0"
+    "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
+    "@types/multer": "^2.0.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
@@ -49,9 +46,9 @@
     "@types/jsonwebtoken": "^8.5.9",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.5.2",
-    "nodemon": "^3.1.10",
     "prisma": "^6.16.2",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.2"
   }
 }
