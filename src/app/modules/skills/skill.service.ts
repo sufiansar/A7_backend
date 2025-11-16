@@ -1,17 +1,21 @@
 import prisma from "../../config/database";
 
 const createSkill = async (userId: string, payload: any) => {
-  const { iconUrl, ...rest } = payload; // extract icon URL if exists
+  const { iconUrl, ...rest } = payload;
 
-  const skill = await prisma.skill.create({
-    data: {
-      ...rest,
-      iconUrl,
-      userId,
-    },
+  const result = await prisma.$transaction(async (tx) => {
+    const skill = await tx.skill.create({
+      data: {
+        ...rest,
+        userId,
+        iconUrl: iconUrl || null,
+      },
+    });
+
+    return skill;
   });
 
-  return skill;
+  return result;
 };
 
 const getAllSkills = async () => {

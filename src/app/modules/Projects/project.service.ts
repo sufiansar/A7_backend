@@ -1,13 +1,26 @@
 import prisma from "../../config/database";
+import { AppError } from "../../utils/AppError";
 
 const createProject = async (userId: string, payload: any) => {
-  const { imageUrl, ...rest } = payload;
+  if (!userId) {
+    throw new AppError(400, "User ID is required");
+  }
+
+  const { imageUrl, imageUrls, ...rest } = payload;
+
+  const finalImageUrls =
+    Array.isArray(imageUrls) && imageUrls.length > 0
+      ? imageUrls
+      : imageUrl
+      ? [imageUrl]
+      : [];
 
   const project = await prisma.project.create({
     data: {
       ...rest,
-      imageUrl,
       authorId: userId,
+      imageUrls: finalImageUrls,
+      imageUrl: finalImageUrls[0] || null,
     },
   });
 

@@ -11,6 +11,7 @@ import { UserRoutes } from "./app/modules/User/user.route";
 import { BlogRoutes } from "./app/modules/Blog/blog.route";
 import { ProjectRoutes } from "./app/modules/Projects/project.route";
 import { SkillRoutes } from "./app/modules/skills/skill.route";
+import { ContactRoutes } from "./app/modules/contact/contact.route";
 
 dotenv.config();
 const app: Application = express();
@@ -31,10 +32,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/v1/auth", AuthRoutes);
-app.use("/api/v1/user", UserRoutes);
+app.use("/api/v1/users", UserRoutes);
 app.use("/api/v1/blogs", BlogRoutes);
 app.use("/api/v1/projects", ProjectRoutes);
 app.use("/api/v1/skills", SkillRoutes);
+app.use("/api/v1/contact", ContactRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({

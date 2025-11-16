@@ -17,6 +17,7 @@ const createSkill = asyncHandler(async (req: Request, res: Response) => {
   const userId = (req as any).user.id;
   const skill = await SkillServices.createSkill(userId, payload);
 
+  console.log(skill);
   sendResponse(res, {
     success: true,
     successCode: 201,

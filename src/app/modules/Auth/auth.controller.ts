@@ -62,9 +62,25 @@ const refreshToken = asyncHandler(async (req: Request, res: Response) => {
   });
 });
 
+const changePassword = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?.id;
+  const { oldPassword, newPassword } = req.body;
+
+  if (!userId) throw new Error("User not authenticated");
+
+  await AuthServices.changePassword(userId, oldPassword, newPassword);
+
+  sendResponse(res, {
+    success: true,
+    successCode: 200,
+    message: "Password changed successfully",
+    data: null,
+  });
+});
+
 export const AuthController = {
   login,
   logout,
-
+  changePassword,
   refreshToken,
 };

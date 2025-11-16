@@ -16,6 +16,7 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
     payload.picture = (req.file as any).path;
   }
 
+  console.log(req.file);
   const result = await UserServices.registerUser(payload);
 
   setAuthCookies(res, result.tokens);
@@ -43,7 +44,7 @@ const getMe = asyncHandler(
 
 const updateUser = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.params.id;
-  
+
   let payload: any;
   if (req.body.data) {
     payload = JSON.parse(req.body.data);

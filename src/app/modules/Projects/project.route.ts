@@ -11,13 +11,13 @@ router.get("/:id", ProjectController.getProjectById);
 router.post(
   "/create",
   checkAuth,
-  MulterUpload.single("file"),
+  MulterUpload.array("files", 10),
   ProjectController.createProject
 );
 router.patch(
   "/:id",
   checkAuth,
-  MulterUpload.single("file"),
+  MulterUpload.array("files", 10),
   ProjectController.updateProject
 );
 router.delete("/:id", checkAuth, ProjectController.deleteProject);

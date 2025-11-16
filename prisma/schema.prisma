@@ -49,6 +49,7 @@ model Project {
   githubUrl    String?
   liveUrl      String?
   imageUrl     String?
+  imageUrls  String[]
   featured     Boolean  @default(false)
   status       String?  
   createdAt    DateTime @default(now())
@@ -60,11 +61,11 @@ model Project {
 model Skill {
   id        String   @id @default(cuid())
   name      String
-  level     String? 
+  level     String?
+  category  String?  
   iconUrl   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
 }
